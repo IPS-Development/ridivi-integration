@@ -3,7 +3,7 @@
 namespace IPS\Integration\Ridivi\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use IPS\Ridivi\Integration\RidiviIntegrationService;
+use IPS\Integration\Ridivi\RidiviIntegrationService;
 
 class RidiviServiceProvider extends ServiceProvider
 {
