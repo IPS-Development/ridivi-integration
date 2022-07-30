@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a2dd23c91071e94eb26d2a2425287b8",
+    "content-hash": "ea12d35af0ada883dea87b2bb49c527c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -311,16 +311,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IPS-Development/commonLib.git",
-                "reference": "935c6bcd8b3f2c393b2dfd84dac5439f68eda791"
+                "reference": "f16b62085c224599c25cfc85d5961b24020325a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IPS-Development/commonLib/zipball/935c6bcd8b3f2c393b2dfd84dac5439f68eda791",
-                "reference": "935c6bcd8b3f2c393b2dfd84dac5439f68eda791",
+                "url": "https://api.github.com/repos/IPS-Development/commonLib/zipball/f16b62085c224599c25cfc85d5961b24020325a0",
+                "reference": "f16b62085c224599c25cfc85d5961b24020325a0",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "~6.0",
+                "laravel/framework": ">=6.0",
                 "php": ">=7.2.9"
             },
             "default-branch": true,
@@ -345,7 +345,7 @@
                 "issues": "https://github.com/IPS-Development/commonLib/issues",
                 "source": "https://github.com/IPS-Development/commonLib/tree/main"
             },
-            "time": "2022-07-30T15:31:26+00:00"
+            "time": "2022-07-30T15:49:31+00:00"
         },
         {
             "name": "laravel/framework",
