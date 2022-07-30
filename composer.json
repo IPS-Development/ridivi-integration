@@ -11,7 +11,7 @@
   ],
   "require": {
     "php": ">=7.2.9",
-    "laravel/framework": "~6.0",
+    "laravel/framework": ">=6.0",
     "mashape/unirest-php": "^3.0",
     "ips/commonlib": "dev-main"
   },
