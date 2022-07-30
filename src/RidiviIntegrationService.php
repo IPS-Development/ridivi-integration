@@ -1,6 +1,6 @@
 <?php
 
-namespace IPS\Ridivi\Integration;
+namespace IPS\Integration\Ridivi;
 
 use IPS\Common\Services\BusinessPartnerService;
 

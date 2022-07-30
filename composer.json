@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "IPS\\Ridivi\\Integration\\": "src"
+      "IPS\\Integration\\Ridivi\\": "src"
     }
   }
 }

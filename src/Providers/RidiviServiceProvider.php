@@ -1,6 +1,6 @@
 <?php
 
-namespace IPS\Ridivi\Integration\Providers;
+namespace IIPS\Integration\Ridivi\Providers;
 
 use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Support\ServiceProvider;
