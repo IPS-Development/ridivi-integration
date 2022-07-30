@@ -1,0 +1,23 @@
+{
+  "name": "ips/ridivi-integration",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Diego Varela Espinoza",
+      "email": "diego.varela@ipslat.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2.9",
+    "laravel/framework": "~6.0",
+    "mashape/unirest-php": "^3.0",
+    "ips/commonlib": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "IPS\\Ridivi\\Integration\\": "src"
+    }
+  }
+}
