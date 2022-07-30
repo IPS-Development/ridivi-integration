@@ -311,12 +311,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/IPS-Development/commonLib.git",
-                "reference": "7890e889ebe058fa05ed2c018d9b24eea878173d"
+                "reference": "935c6bcd8b3f2c393b2dfd84dac5439f68eda791"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/IPS-Development/commonLib/zipball/7890e889ebe058fa05ed2c018d9b24eea878173d",
-                "reference": "7890e889ebe058fa05ed2c018d9b24eea878173d",
+                "url": "https://api.github.com/repos/IPS-Development/commonLib/zipball/935c6bcd8b3f2c393b2dfd84dac5439f68eda791",
+                "reference": "935c6bcd8b3f2c393b2dfd84dac5439f68eda791",
                 "shasum": ""
             },
             "require": {
@@ -345,7 +345,7 @@
                 "issues": "https://github.com/IPS-Development/commonLib/issues",
                 "source": "https://github.com/IPS-Development/commonLib/tree/main"
             },
-            "time": "2022-07-30T13:49:09+00:00"
+            "time": "2022-07-30T15:31:26+00:00"
         },
         {
             "name": "laravel/framework",

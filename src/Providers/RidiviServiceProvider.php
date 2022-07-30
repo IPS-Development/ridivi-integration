@@ -2,7 +2,6 @@
 
 namespace IIPS\Integration\Ridivi\Providers;
 
-use Illuminate\Bus\BusServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use IPS\Ridivi\Integration\RidiviIntegrationService;
 

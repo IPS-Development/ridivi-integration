@@ -2,7 +2,8 @@
 
 namespace IPS\Integration\Ridivi\Facades;
 
-use IPS\Common\Facaces\IntegrationServiceFacade;
+
+use IPS\Common\Facades\IntegrationServiceFacade;
 
 class RidiviFacade extends IntegrationServiceFacade
 {
