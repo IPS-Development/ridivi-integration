@@ -1,6 +1,6 @@
 <?php
 
-namespace IIPS\Integration\Ridivi\Providers;
+namespace IPS\Integration\Ridivi\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use IPS\Ridivi\Integration\RidiviIntegrationService;
