@@ -1,39 +1,8 @@
 <?php
 
-namespace IPS\Integration\Ridivi;
+namespace IPS\Integration\Ridivi\Classes;
 
-class Moneda {
-    const dolones = 'CRC';
-    const dolares = 'USD';
-    const euros = 'EUR';
-}
-
-class TipoIdentificacion {
-    const cedulaNacional = 0;
-    const DIMEX = 1;
-    const gobierno = 2;
-    const intitucionesAutonomas = 4;
-    const DIDI = 5;
-    const pasaporte = 9;
-}
-
-class TipoEmpresa{
-    const propietarioUnico = 0;
-    const sociedad = 1;
-    const sinFinesDeSinLucro = 2;
-    const sociedadLimitada = 3;
-    const sociedadAnonima = 4;
-}
-
-class TipoTransferencia {
-    const CCD = 'CCD';
-    const CDD = 'CDD';
-    const DTR = 'DTR';
-    const TFT = 'TFT';
-    const PIN = 'PIN';
-}
-
-class Options {
+class Option {
     const getKey = 'getKey';
     const releaseKey = 'releaseKey';
     const checkKey = 'checkKey';
@@ -61,15 +30,3 @@ class Options {
     const updateFavoriteAccount = 'updateFavoriteAccount';
     const deleteFavoriteAccount = 'deleteFavoriteAccount';
 }
-
-class FileKey {
-    const myID = 'myID';
-    const myHouse = 'myHouse';
-    const myFunding = 'myFunding';
-    const myFormalID = 'myFormalID';
-    const myTaxes = 'myTaxes';
-    const cmpOffice = 'cmpOffice';
-    const mpIncome = 'mpIncome';
-    const cmpRegistration = 'cmpRegistration';
-}
-
