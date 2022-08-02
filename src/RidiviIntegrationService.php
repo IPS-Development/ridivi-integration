@@ -13,7 +13,7 @@ class RidiviIntegrationService extends BusinessPartnerService
 
     public function __construct()
     {
-        parent::__construct("ridivi");
+        parent::__construct("ridivi_settings");
         //init api client
     }
 
