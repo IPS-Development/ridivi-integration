@@ -28,7 +28,7 @@ class RidiviIntegrationService extends BusinessPartnerService
                 $result = $this->buildBasicErrorResult();
             }
         } else {
-            $result - $response->raw_body;
+            $result = $response->raw_body;
         }
         return $result;
     }
