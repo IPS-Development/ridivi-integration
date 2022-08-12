@@ -243,7 +243,9 @@ class RidiviIntegrationService extends BusinessPartnerService
             'nationality' => $input['nationality'],
             'NewPassword' => $input['password'],
             'phone' => $input['phone'],
-            'email' => $input['email']
+            'email' => $input['email'],
+            'file1' => $input['file1'],
+            'file2' => $input['file2']
         ];
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
