@@ -26,6 +26,8 @@ class RidiviIntegrationService extends BusinessPartnerService
             $result = json_decode($response->raw_body, true);
             if (!$result) {
                 $result = $this->buildBasicErrorResult();
+            }else if(array_key_exists('type', $result)){
+
             }
         } else {
             $result = $response->raw_body;
