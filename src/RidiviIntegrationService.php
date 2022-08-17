@@ -26,13 +26,20 @@ class RidiviIntegrationService extends BusinessPartnerService
             $result = json_decode($response->raw_body, true);
             if (!$result) {
                 $result = $this->buildBasicErrorResult();
-            }else if(array_key_exists('type', $result)){
-
+            }else if($this->isBucketErrorResult($result)){
+                $decoded_result = $this->buildBasicErrorResult();
+                $decoded_result['message'] = sprintf('%s => %s: %s', $result['code'],$result['title'], $result['detail']);
+                $result = $decoded_result;
             }
         } else {
             $result = $response->raw_body;
         }
         return $result;
+    }
+
+    private function isBucketErrorResult(Array $data)
+    {
+        return array_key_exists('type', $data) && array_key_exists('title', $data) && array_key_exists('code', $data);
     }
 
     private function buildBasicErrorResult()
