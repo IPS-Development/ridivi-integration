@@ -322,9 +322,9 @@ class RidiviIntegrationService extends BusinessPartnerService
         ];
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        if ($output['error'] == TRUE)
+            throw new RidiviException(Option::uploadFiles, $output['message']);
         return $output;
-        //if ($output['error'] == TRUE)
-        //    throw new RidiviException(Option::uploadFiles, $output['message']);
     }
 
     public function newADA($input)
