@@ -307,7 +307,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::newAccount, $output['message']);
 
-        return $output['user'];
+        return $output;
     }
 
     public function uploadFiles($name, $contentBase64)
