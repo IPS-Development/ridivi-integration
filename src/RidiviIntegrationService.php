@@ -387,8 +387,6 @@ class RidiviIntegrationService extends BusinessPartnerService
             'key' => $key,
             'time' => $input['time'],
             'cur' => $input['currency'],
-            'idNUmber' => $input['idNumber'],
-            'cur' => $input['currency'],
             'from' => [
                 'id' => $input['sourceIdNumber'],
                 'iban' => $input['sourceIban'],
