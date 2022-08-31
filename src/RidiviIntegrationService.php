@@ -399,11 +399,12 @@ class RidiviIntegrationService extends BusinessPartnerService
                 'iban' => $input['destIban'],
                 'name' => $input['destName']
             ],
-            'fee' => [
+            /*'fee' => [
                 'id' => $input['feeIdNumber'],
                 'iban' => $input['feeIban'],
                 'name' => $input['feeName']
-            ],
+            ],*/
+            'fee' => null,
             'amount' => $input['amount'],
             'text' => $input['description'],
             'service' => $input['service'],
