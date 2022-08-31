@@ -20,7 +20,8 @@ class RidiviIntegrationService extends BusinessPartnerService
     private function httpPost($url, $headers, $payload, &$status_code, $format_output = false)
     {
         $result = false;
-        $response = Request::post($url, $headers, $payload);
+        $body = Body::json($payload);
+        $response = Request::post($url, $headers, $body);
         $status_code = $response->code;
         if ($format_output) {
             $result = json_decode($response->raw_body, true);
