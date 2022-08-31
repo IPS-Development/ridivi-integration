@@ -406,6 +406,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'service' => $input['service'],
             'reference' => $input['reference']
         ];
+        return $payload;
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
         if ($output['error'] == TRUE)
