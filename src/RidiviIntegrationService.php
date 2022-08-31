@@ -331,6 +331,16 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $settings = self::getSettings();
         $key = $this->getKey($settings);
+        $to = [
+            'idNumber' => $input['destIdNumber'],
+            'iban' => $input['destIban'],
+            'name' => $input['destName']
+        ];
+        $from  = [
+            'idNumber' => $input['sourceIdNumber'],
+            'iban' => $input['sourceIban'],
+            'name' => $input['sourceName']
+        ];
         $payload = [
             'option' => Option::newADA,
             'key' => $key,
@@ -342,16 +352,8 @@ class RidiviIntegrationService extends BusinessPartnerService
             'maxAmount' => $input['maxAmount'],
             'endsOn' => $input['endsOn']->format('Y-m-d'),
             'description' => $input['description'],
-            'to' => [
-                'idNumber' => $input['destIdNumber'],
-                'iban' => $input['destIban'],
-                'name' => $input['destName']
-            ],
-            'from' => [
-                'idNumber' => $input['sourceIdNumber'],
-                'iban' => $input['sourceIban'],
-                'name' => $input['sourceName']
-            ]
+            'to' => (object)$to,
+            'from' => (object)$from
         ];
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
