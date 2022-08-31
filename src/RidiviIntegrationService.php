@@ -20,7 +20,6 @@ class RidiviIntegrationService extends BusinessPartnerService
     private function httpPost($url, $headers, $payload, &$status_code, $format_output = false)
     {
         $result = false;
-        //$body = Body::json($payload);
         $response = Request::post($url, $headers, $payload);
         $status_code = $response->code;
         if ($format_output) {
@@ -353,8 +352,8 @@ class RidiviIntegrationService extends BusinessPartnerService
             'maxAmount' => $input['maxAmount'],
             'endsOn' => $input['endsOn']->format('Y-m-d'),
             'description' => $input['description'],
-            'to' => (object)$to,
-            'from' => (object)$from
+            'to' => (object) $to,
+            'from' => (object) $from,
         ];
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
@@ -385,28 +384,29 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $settings = self::getSettings();
         $key = $this->getKey($settings);
+        $to = [
+            'idNumber' => $input['destIdNumber'],
+            'iban' => $input['destIban'],
+            'name' => $input['destName']
+        ];
+        $from  = [
+            'idNumber' => $input['sourceIdNumber'],
+            'iban' => $input['sourceIban'],
+            'name' => $input['sourceName']
+        ];
         $payload = [
             'option' => Option::loadTransfer,
             'key' => $key,
             'time' => $input['time'],
             'cur' => $input['currency'],
-            'from' => [
-                'id' => $input['sourceIdNumber'],
-                'iban' => $input['sourceIban'],
-                'name' => $input['sourceName']
-            ],
-            'to' => [
-                'id' => $input['destIdNumber'],
-                'iban' => $input['destIban'],
-                'name' => $input['destName']
-            ],
+            'from' => (object)$from,
+            'to' => (object)$to,
             'fee' => null,
             'amount' => $input['amount'],
             'text' => $input['description'],
             'service' => $input['service'],
             'reference' => $input['reference']
         ];
-        return $payload;
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
         if ($output['error'] == TRUE)
