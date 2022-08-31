@@ -21,6 +21,7 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $result = false;
         $body = Body::json($payload);
+        var_dump($body);
         $response = Request::post($url, $headers, $body);
         $status_code = $response->code;
         if ($format_output) {
