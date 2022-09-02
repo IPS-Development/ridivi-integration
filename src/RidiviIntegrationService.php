@@ -20,7 +20,10 @@ class RidiviIntegrationService extends BusinessPartnerService
     private function httpPost($url, $headers, $payload, &$status_code, $format_output = false)
     {
         $result = false;
-        $response = Request::post($url, $headers, $payload);
+        $defaultHeaders = array(
+            'Content-Type: application/json; charset=utf-8'
+        );
+        /*$response = Request::post($url, $headers, $payload);
         $status_code = $response->code;
         if ($format_output) {
             $result = json_decode($response->raw_body, true);
@@ -33,6 +36,31 @@ class RidiviIntegrationService extends BusinessPartnerService
             }
         } else {
             $result = $response->raw_body;
+        }*/
+        $ldSapPayload = json_encode($payload);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $ldSapPayload);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $output = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if($format_output){
+            $result = json_decode($output, true);
+            if (!$result) {
+                $result = $this->buildBasicErrorResult();
+            }else if($this->isBucketErrorResult($result)){
+                $decoded_result = $this->buildBasicErrorResult();
+                $decoded_result['message'] = sprintf('%s => %s: %s', $result['code'],$result['title'], $result['detail']);
+                $result = $decoded_result;
+            }
+        }else{
+            $result = $output;
         }
         return $result;
     }
