@@ -22,7 +22,7 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $result = false;
         $defaultHeaders = array(
-            'Content-Type: application/json; charset=utf-8'
+            'Content-Type: application/json; charset=utf-8',
         );
         /*$response = Request::post($url, $headers, $payload);
         $status_code = $response->code;
@@ -40,6 +40,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         }*/
         Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
         $ldSapPayload = json_encode($payload);
+        $headers []= 'Content-Length: ' . strlen($ldSapPayload);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
