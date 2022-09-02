@@ -2,6 +2,7 @@
 
 namespace IPS\Integration\Ridivi;
 
+use Illuminate\Support\Facades\Log;
 use IPS\Common\Services\BusinessPartnerService;
 use IPS\Integration\Ridivi\Classes\Option;
 use IPS\Integration\Ridivi\Exceptions\RidiviException;
@@ -37,11 +38,11 @@ class RidiviIntegrationService extends BusinessPartnerService
         } else {
             $result = $response->raw_body;
         }*/
+        Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
         $ldSapPayload = json_encode($payload);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $ldSapPayload);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -49,6 +50,7 @@ class RidiviIntegrationService extends BusinessPartnerService
 
         $output = curl_exec($ch);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        Log::debug(sprintf('%s::%s httpPost OUTPUT [%s] [%s]',__CLASS__, __METHOD__, $status_code, $output));
         curl_close($ch);
         if($format_output){
             $result = json_decode($output, true);
