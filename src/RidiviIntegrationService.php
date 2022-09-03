@@ -516,7 +516,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getExchange, $output['message']);
 
-        return $output;
+        return $output['exchange'];
     }
 
     public function getAccountData($idNumber, $iban)
