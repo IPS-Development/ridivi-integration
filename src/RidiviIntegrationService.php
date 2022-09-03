@@ -22,7 +22,7 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $result = false;
         $jsonBody = Body::Json($payload);
-        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]',__CLASS__, __METHOD__, $url, $jsonBody));
+        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]', __CLASS__, __METHOD__, $url, $jsonBody));
         Log::info('http headers', $headers);
         $response = Request::post($url, $headers, $jsonBody);
         $status_code = $response->code;
@@ -30,15 +30,15 @@ class RidiviIntegrationService extends BusinessPartnerService
             $result = json_decode($response->raw_body, true);
             if (!$result) {
                 $result = $this->buildBasicErrorResult();
-            }else if($this->isBucketErrorResult($result)){
+            } else if ($this->isBucketErrorResult($result)) {
                 $decoded_result = $this->buildBasicErrorResult();
-                $decoded_result['message'] = sprintf('%s => %s: %s', $result['code'],$result['title'], $result['detail']);
+                $decoded_result['message'] = sprintf('%s => %s: %s', $result['code'], $result['title'], $result['detail']);
                 $result = $decoded_result;
             }
         } else {
             $result = $response->raw_body;
         }
-        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]',__CLASS__, __METHOD__, $url, $response->raw_body));
+        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]', __CLASS__, __METHOD__, $url, $response->raw_body));
         /*Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
         $ldSapPayload = json_encode($payload);
         $headers []= 'Content-Length: ' . strlen($ldSapPayload);
@@ -69,7 +69,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         return $result;
     }
 
-    private function isBucketErrorResult(Array $data)
+    private function isBucketErrorResult(array $data)
     {
         return array_key_exists('type', $data) && array_key_exists('title', $data) && array_key_exists('code', $data);
     }
@@ -90,7 +90,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'password' => hash('sha1', $this->getProperty(['api_settings', 'password'], $settings), false)
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getKey, $output['message']);
 
@@ -117,7 +117,7 @@ class RidiviIntegrationService extends BusinessPartnerService
                 'key' => $key
             ];
             $statusCode = -1;
-            $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+            $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
             if ($output['error'] == TRUE)
                 throw new RidiviException(Option::releaseKey, $output['message']);
         }
@@ -133,7 +133,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'key' => $key
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
 
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::checkKey, $output['message']);
@@ -151,7 +151,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'idNumber' => $idNumber
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getUser, $output['message']);
 
@@ -168,7 +168,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $iban
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getAccount, $output['message']);
 
@@ -185,7 +185,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $iban
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getIbanData, $output['message']);
 
@@ -203,7 +203,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $iban
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getADAs, $output['message']);
 
@@ -223,7 +223,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'destAccount' => $destAccount
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getFee, $output['message']);
 
@@ -243,7 +243,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'pageNumber' => $pageNumber
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getHistory, $output['message']);
 
@@ -261,7 +261,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'movementNumber' => $movementNumber
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getHistoryDetail, $output['message']);
 
@@ -289,7 +289,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'file2' => $input['file2']
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::newUser, $output['message']);
 
@@ -318,7 +318,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             "regCountry" => $input['regCountry']
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::newCompany, $output['message']);
     }
@@ -335,7 +335,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'name' => $description
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::newAccount, $output['message']);
 
@@ -353,7 +353,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'contend' => $contentBase64
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::uploadFiles, $output['message']);
         return $output;
@@ -368,7 +368,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $input['destIban'],
             'name' => $input['destName']
         ];
-        $from  = [
+        $from = [
             'idNumber' => $input['sourceIdNumber'],
             'iban' => $input['sourceIban'],
             'name' => $input['sourceName']
@@ -384,11 +384,11 @@ class RidiviIntegrationService extends BusinessPartnerService
             'maxAmount' => $input['maxAmount'],
             'endsOn' => $input['endsOn']->format('Y-m-d'),
             'description' => $input['description'],
-            'to' => (object) $to,
-            'from' => (object) $from,
+            'to' => (object)$to,
+            'from' => (object)$from,
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::newADA, $output['message']);
     }
@@ -406,7 +406,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'files' => $fileBase64
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::uploadFile, $output['message']);
     }
@@ -421,7 +421,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $input['destIban'],
             'name' => $input['destName']
         ];
-        $from  = [
+        $from = [
             'idNumber' => $input['sourceIdNumber'],
             'iban' => $input['sourceIban'],
             'name' => $input['sourceName']
@@ -440,7 +440,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'reference' => $input['reference']
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::loadTransfer, $output['message']);
 
@@ -457,7 +457,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'loadKey' => $loadKey
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::sendLoadedTransfer, $output['message']);
 
@@ -474,7 +474,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'loadKey' => $loadKey
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getLoadedTransfer, $output['message']);
 
@@ -488,17 +488,17 @@ class RidiviIntegrationService extends BusinessPartnerService
         $payload = [
             'option' => Option::updateProfileInfo,
             'key' => $key,
-            'idNumber' =>  $input['idNumber'],
+            'idNumber' => $input['idNumber'],
             'email' => $input['email'],
             'phone' => $input['phone'],
-            'firstName'=> $input['firstName'],
+            'firstName' => $input['firstName'],
             'lastName' => $input['lastName'],
             'nationality' => $input['nationality'],
             'idLocality' => $input['idLocality'],
             'idExpirationDate' => $input['idExpirationDate']->format('d/m/Y')
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::updateProfileInfo, $output['message']);
     }
@@ -512,7 +512,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'key' => $key
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getExchange, $output['message']);
 
@@ -530,7 +530,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'iban' => $iban
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getAccountData, $output['message']);
 
@@ -551,7 +551,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'currency' => $input['currency']
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::insertFavoriteAccount, $output['message']);
     }
@@ -566,7 +566,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'idNumber' => $idNumber
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getFavoriteAccounts, $output['message']);
 
@@ -588,7 +588,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             'currency' => $input['currency']
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::updateFavoriteAccount, $output['message']);
     }
@@ -604,9 +604,15 @@ class RidiviIntegrationService extends BusinessPartnerService
             'idNumber' => $userIdNumber,
         ];
         $statusCode = -1;
-        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), ['Content-Type', 'application/json'], $payload, $statusCode, true);
+        $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::deleteFavoriteAccount, $output['message']);
+    }
+
+    private function getDefaultHeaders()
+    {
+        return ['Accept' => 'application/json',
+            'Content-Type' => 'application/json'];
     }
 
 
