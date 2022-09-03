@@ -21,10 +21,10 @@ class RidiviIntegrationService extends BusinessPartnerService
     private function httpPost($url, $headers, $payload, &$status_code, $format_output = false)
     {
         $result = false;
-        $defaultHeaders = array(
-            'Content-Type: application/json; charset=utf-8',
-        );
-        /*$response = Request::post($url, $headers, $payload);
+        $jsonBody = Body::Json($payload);
+        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]',__CLASS__, __METHOD__, $url, $jsonBody));
+        Log::info('http headers', $headers);
+        $response = Request::post($url, $headers, $jsonBody);
         $status_code = $response->code;
         if ($format_output) {
             $result = json_decode($response->raw_body, true);
@@ -37,8 +37,9 @@ class RidiviIntegrationService extends BusinessPartnerService
             }
         } else {
             $result = $response->raw_body;
-        }*/
-        Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
+        }
+        Log::debug(sprintf('%s::%s httpPost(%s) PAYLOAD [%s]',__CLASS__, __METHOD__, $url, $response->raw_body));
+        /*Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
         $ldSapPayload = json_encode($payload);
         $headers []= 'Content-Length: ' . strlen($ldSapPayload);
         $ch = curl_init();
@@ -64,7 +65,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             }
         }else{
             $result = $output;
-        }
+        }*/
         return $result;
     }
 
