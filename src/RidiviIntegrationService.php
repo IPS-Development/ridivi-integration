@@ -309,7 +309,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             "regLocation" => $input['regLocation'],
             "idNumber" => $input['idNumber'],
             "Name" => $input['nombre'],
-            "Type" => "Individual",
+            "Type" => $input['type'],
             "Phone" => $input['phone'],
             "companyAddress" => $input['companyAddress'],
             "responsibleID" => $input['responsibleID'],
