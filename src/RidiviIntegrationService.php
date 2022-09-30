@@ -417,12 +417,12 @@ class RidiviIntegrationService extends BusinessPartnerService
         $settings = self::getSettings();
         $key = $this->getKey($settings);
         $to = [
-            'idNumber' => $input['destIdNumber'],
+            'id' => $input['destIdNumber'],
             'iban' => $input['destIban'],
             'name' => $input['destName']
         ];
         $from = [
-            'idNumber' => $input['sourceIdNumber'],
+            'id' => $input['sourceIdNumber'],
             'iban' => $input['sourceIban'],
             'name' => $input['sourceName']
         ];
