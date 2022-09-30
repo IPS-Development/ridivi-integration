@@ -308,7 +308,7 @@ class RidiviIntegrationService extends BusinessPartnerService
             "regOn" => $input['regOn']->format("Y-m-d"),
             "regLocation" => $input['regLocation'],
             "idNumber" => $input['idNumber'],
-            "Name" => $input['nombre'],
+            "Name" => $input['name'],
             "Type" => $input['type'],
             "Phone" => $input['phone'],
             "companyAddress" => $input['companyAddress'],
