@@ -458,7 +458,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         ];
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
-        if ($output['error'] == TRUE)
+        if (array_key_exists('error',$output) && $output['error'] == TRUE)
             throw new RidiviException(Option::sendLoadedTransfer, $output['message']);
 
         return $output['send'];
