@@ -22,7 +22,7 @@ class RidiviIntegrationService extends BusinessPartnerService
     {
         $result = false;
         $jsonBody = Body::Json($payload);
-        Log::debug(sprintf('%s::%s url(%s) PAYLOAD (%s)', 'RidiviIntegrationService', __METHOD__, $url, $jsonBody));
+        Log::debug(sprintf('%s::%s url(%s) PAYLOAD (%s)', 'RidiviIntegrationService', 'httpPost', $url, $jsonBody));
         Log::info('http headers', $headers);
         $response = Request::post($url, $headers, $jsonBody);
         $status_code = $response->code;
@@ -38,7 +38,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         } else {
             $result = $response->raw_body;
         }
-        Log::debug(sprintf('%s::%s status(%s) RESPONSE (%s)', 'RidiviIntegrationService', __METHOD__, $response->code, $response->raw_body));
+        Log::debug(sprintf('%s::%s status(%s) RESPONSE (%s)', 'RidiviIntegrationService', 'httpPost', $response->code, $response->raw_body));
         /*Log::info(sprintf('%s::%s httpPost(%s) PAYLOAD',__CLASS__, __METHOD__, $url), $payload);
         $ldSapPayload = json_encode($payload);
         $headers []= 'Content-Length: ' . strlen($ldSapPayload);
