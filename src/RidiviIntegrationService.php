@@ -461,7 +461,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         if (array_key_exists('error',$output) && $output['error'] == TRUE)
             throw new RidiviException(Option::sendLoadedTransfer, $output['message']);
 
-        return $output['send'];
+        return $output;
     }
 
     public function getLoadedTransfer($loadKey)
