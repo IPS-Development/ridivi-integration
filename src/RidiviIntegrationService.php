@@ -125,6 +125,7 @@ class RidiviIntegrationService extends BusinessPartnerService
 
     public function checkKey($key, $settings)
     {
+        $this->setServiceTable();
         if ($key == null || strlen($key) == 0)
             throw new RidiviException(Option::checkKey, 'Null or empty key');
 
@@ -247,7 +248,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getHistory, $output['message']);
 
-        return $output['transfers'];
+        return $output;
     }
 
     public function getHistoryDetail($iban, int $movementNumber)
