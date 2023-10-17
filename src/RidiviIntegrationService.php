@@ -246,7 +246,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         $statusCode = -1;
         $output = $this->httpPost($this->getProperty(['api_settings', 'api_context'], $settings), $this->getDefaultHeaders(), $payload, $statusCode, true);
         if ($output['error'] == TRUE)
-            throw new RidiviException(Option::getHistory, $output['message']);
+            throw new RidiviException(Option::getHistory, array_key_exists("message", $output) ? $output['message'] : "No data found");
 
         return $output;
     }
