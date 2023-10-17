@@ -248,7 +248,7 @@ class RidiviIntegrationService extends BusinessPartnerService
         if ($output['error'] == TRUE)
             throw new RidiviException(Option::getHistory, array_key_exists("message", $output) ? $output['message'] : "No data found");
 
-        return $output;
+        return $output['transfers'];
     }
 
     public function getHistoryDetail($iban, int $movementNumber)
